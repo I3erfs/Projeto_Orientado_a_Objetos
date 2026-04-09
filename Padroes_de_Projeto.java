@@ -44,22 +44,45 @@ class Notify {
         break;
       default:
         System.out.println("Erro");
+    }
+  }
+}
+
+class Logger{
+  
+  private Logger() {}
+
+  private static Logger instance;
+
+  public static Logger getInstance() {
+      if (instance == null) // 1a vez que chama-se getInstance
+        instance = new Logger();
+      return instance;
   }
 
-}
+  public void mensagem(String msg) {
+    System.out.println(msg);
+  }
+  
 
 public class Main { 
 
   void f() {
-    Notification c = Notify.create("email");  
+    Notification c = Notify.create("email");
+    Logger log = Logger.getInstance();
+    log.mensagem("Executando f" + log);
   }
 
   void g() {
     Notification c = Notify.create("SMS");
+    Logger log = Logger.getInstance();
+    log.mensagem("Executando g" + log);
   }
   
   void h() {
     Channel c = Notify.create("push");
+    Logger log = Logger.getInstance();
+    log.mensagem("Executando h" + log);
   }
   
   public static void main(String [] args) {
